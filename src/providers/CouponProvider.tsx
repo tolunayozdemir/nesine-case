@@ -42,10 +42,13 @@ const CouponProvider: FunctionComponent<PropsWithChildren<{}>> = ({
         ...coupon.slice(0, gameIndex),
         ...coupon.slice(gameIndex + 1),
       ];
-      setCoupon(newCoupon);
     }
 
-    setCoupon([...newCoupon, couponItem]);
+    if (isBetPlaced(couponItem)) {
+      setCoupon(newCoupon);
+    } else {
+      setCoupon([...newCoupon, couponItem]);
+    }
   };
 
   const value = useMemo(() => {
