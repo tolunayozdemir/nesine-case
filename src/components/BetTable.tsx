@@ -1,15 +1,15 @@
-import React, { Fragment } from "react";
-import useBets from "../hooks/useBets";
+import React, { FC, Fragment } from "react";
+import useEvents from "../hooks/useEvents";
 import useCoupon from "../hooks/useCoupon";
-import { CouponItem } from "../providers/CouponProvider";
 import { classnames } from "../utils";
+import Bet from "../models/Bet";
 
-const BetCell = (couponItem: CouponItem) => {
-  const { isBetPlaced, onBet } = useCoupon();
-  const { bet, OCG_ID, OC_ID } = couponItem;
+const BetCell: FC<{ bet: Bet }> = (props) => {
+  const { bet } = props;
+  const { isBetOnCoupon, onBet } = useCoupon();
 
-  const isActive = isBetPlaced(couponItem);
-  const onClick = () => onBet({ bet, OC_ID, OCG_ID });
+  const isActive = isBetOnCoupon(bet);
+  const onClick = () => onBet(bet);
 
   return (
     <td
@@ -19,67 +19,75 @@ const BetCell = (couponItem: CouponItem) => {
         ["bet-cell-active"]: isActive,
       })}
     >
-      {bet.OCG[OCG_ID]?.OC[OC_ID]?.O}
+      {bet.odd}
     </td>
   );
 };
 
-const LabelCell = (couponItem: CouponItem) => {
-  const { bet, OCG_ID, OC_ID } = couponItem;
-  return <td>{bet.OCG[OCG_ID].OC[OC_ID].N}</td>;
+const BetLabelCell: FC<{ bet: Bet }> = (props) => {
+  const { bet } = props;
+  return <td>{bet.name}</td>;
 };
 
 const BetTable = () => {
-  const bets = useBets();
+  const events = useEvents();
 
   return (
     <table className="bet-table">
       <tbody>
-        {bets.map((bet) => {
+        {events.map((event) => {
+          const ms1 = new Bet(event, "1", "0");
+          const ms0 = new Bet(event, "1", "1");
+          const alt = new Bet(event, "5", "25");
+          const ust = new Bet(event, "5", "26");
+          const ms10c = new Bet(event, "2", "3");
+          const ms12c = new Bet(event, "2", "4");
+          const ms02c = new Bet(event, "2", "5");
+
           return (
-            <Fragment key={bet.NID}>
+            <Fragment key={event.NID}>
               <tr>
                 <td>
-                  {bet.D} {bet.DAY} {bet.LN}
+                  {event.D} {event.DAY} {event.LN}
                 </td>
                 <td>Yorumlar</td>
                 <td></td>
-                <LabelCell bet={bet} OCG_ID="1" OC_ID="0" />
-                <LabelCell bet={bet} OCG_ID="1" OC_ID="1" />
+                <BetLabelCell bet={ms1} />
+                <BetLabelCell bet={ms0} />
                 <td>2</td>
-                <LabelCell bet={bet} OCG_ID="5" OC_ID="25" />
-                <LabelCell bet={bet} OCG_ID="5" OC_ID="26" />
+                <BetLabelCell bet={alt} />
+                <BetLabelCell bet={ust} />
                 <td>H1</td>
                 <td>1</td>
                 <td>X</td>
                 <td>2</td>
                 <td>H2</td>
-                <LabelCell bet={bet} OCG_ID="2" OC_ID="3" />
-                <LabelCell bet={bet} OCG_ID="2" OC_ID="4" />
-                <LabelCell bet={bet} OCG_ID="2" OC_ID="5" />
+                <BetLabelCell bet={ms10c} />
+                <BetLabelCell bet={ms12c} />
+                <BetLabelCell bet={ms02c} />
                 <td>Var</td>
                 <td>Yok</td>
                 <td>+99</td>
               </tr>
               <tr>
                 <td className="bet-name-cell">
-                  <b>{bet.C}</b> {bet.T} {bet.N}
+                  <b>{event.C}</b> {event.T} {event.N}
                 </td>
                 <td>Yorumlar</td>
-                <td>{bet.OCG[1].MBS}</td>
-                <BetCell bet={bet} OCG_ID="1" OC_ID="0" />
-                <BetCell bet={bet} OCG_ID="1" OC_ID="1" />
+                <td>{event.OCG[1].MBS}</td>
+                <BetCell bet={ms1} />
+                <BetCell bet={ms0} />
                 <td></td>
-                <BetCell bet={bet} OCG_ID="5" OC_ID="25" />
-                <BetCell bet={bet} OCG_ID="5" OC_ID="26" />
-                <td></td>
-                <td></td>
+                <BetCell bet={alt} />
+                <BetCell bet={ust} />
                 <td></td>
                 <td></td>
                 <td></td>
-                <BetCell bet={bet} OCG_ID="2" OC_ID="3" />
-                <BetCell bet={bet} OCG_ID="2" OC_ID="4" />
-                <BetCell bet={bet} OCG_ID="2" OC_ID="5" />
+                <td></td>
+                <td></td>
+                <BetCell bet={ms10c} />
+                <BetCell bet={ms12c} />
+                <BetCell bet={ms02c} />
                 <td></td>
                 <td></td>
                 <td>3</td>

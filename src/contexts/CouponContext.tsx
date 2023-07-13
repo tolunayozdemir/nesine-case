@@ -1,10 +1,11 @@
 import { createContext } from "react";
-import { CouponItem } from "../providers/CouponProvider";
+import { Event } from "../types";
+import Bet from "../models/Bet";
 
 interface CouponContext {
-  coupon: CouponItem[];
-  onBet: (bet: CouponItem) => void;
-  isBetPlaced: (bet: CouponItem) => boolean;
+  coupon: Bet[];
+  onBet: (bet: Bet) => void;
+  isBetOnCoupon: (bet: Bet) => boolean;
 }
 
 const CouponContext = createContext<CouponContext | null>(null);

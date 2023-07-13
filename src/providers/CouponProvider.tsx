@@ -4,55 +4,39 @@ import React, {
   useMemo,
   useState,
 } from "react";
-import { Bet } from "../types";
 import CouponContext from "../contexts/CouponContext";
-
-export interface CouponItem {
-  bet: Bet;
-  OCG_ID: string;
-  OC_ID: string;
-}
+import Bet from "../models/Bet";
 
 const CouponProvider: FunctionComponent<PropsWithChildren<{}>> = ({
   children,
 }) => {
-  const [coupon, setCoupon] = useState<CouponItem[]>([]);
+  const [coupon, setCoupon] = useState<Bet[]>([]);
 
-  const isBetPlaced = (couponItem: CouponItem) => {
-    const { bet, OCG_ID, OC_ID } = couponItem;
-
-    return (
-      coupon.findIndex((c) => {
-        return (
-          bet.NID === c.bet.NID && c.OCG_ID === OCG_ID && c.OC_ID === OC_ID
-        );
-      }) > -1
-    );
+  const isBetOnCoupon = (newBet: Bet) => {
+    return coupon.findIndex((bet) => bet.id === newBet.id) > -1;
   };
 
-  const onBet = (couponItem: CouponItem) => {
-    const { bet } = couponItem;
-
+  const onBet = (newBet: Bet) => {
+    const { eventId } = newBet;
     let newCoupon = [...coupon];
+    const eventIndex = coupon.findIndex((bet) => bet.eventId === eventId);
 
-    const gameIndex = coupon.findIndex((c) => c.bet.NID === bet.NID);
-
-    if (gameIndex > -1) {
+    if (eventIndex > -1) {
       newCoupon = [
-        ...coupon.slice(0, gameIndex),
-        ...coupon.slice(gameIndex + 1),
+        ...coupon.slice(0, eventIndex),
+        ...coupon.slice(eventIndex + 1),
       ];
     }
 
-    if (isBetPlaced(couponItem)) {
-      setCoupon(newCoupon);
-    } else {
-      setCoupon([...newCoupon, couponItem]);
+    if (!isBetOnCoupon(newBet)) {
+      newCoupon = [...newCoupon, newBet];
     }
+
+    setCoupon(newCoupon);
   };
 
   const value = useMemo(() => {
-    return { coupon, onBet, isBetPlaced };
+    return { coupon, onBet, isBetOnCoupon };
   }, [coupon]);
 
   return (

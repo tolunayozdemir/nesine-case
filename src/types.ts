@@ -1,4 +1,18 @@
-export interface Bet {
+export interface OC {
+  ID: string;
+  O: string;
+  N: string;
+}
+
+export interface OCG {
+  MBS: string;
+  ID: string;
+  OC: {
+    [key in string]: OC;
+  };
+}
+
+export interface Event {
   NID: string;
   D: string;
   LN: string;
@@ -7,16 +21,6 @@ export interface Bet {
   T: string;
   N: string;
   OCG: {
-    [key in string]: {
-      MBS: string;
-      ID: string;
-      OC: {
-        [key in string]: {
-          ID: string;
-          O: string;
-          N: string;
-        };
-      };
-    };
+    [key in string]: OCG;
   };
 }

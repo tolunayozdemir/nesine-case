@@ -26,3 +26,25 @@
 .bet-name-cell {
   padding: 10px 10px !important;
 }
+
+.coupon {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  border: 1px solid black;
+  width: 400px;
+  padding: 8px;
+}
+
+.coupon-item {
+  font-size: 15px;
+}
+
+.coupon-item > span {
+  margin-left: 8px;
+}
+
+.coupon-total {
+  font-size: 18px;
+}
