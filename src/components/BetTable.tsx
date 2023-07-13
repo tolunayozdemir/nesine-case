@@ -4,6 +4,7 @@ import useCoupon from "../hooks/useCoupon";
 import { classnames } from "../utils";
 import Bet from "../models/Bet";
 import Loading from "./Loading";
+import Error from "./Error";
 
 const BetCell: FC<{ bet: Bet }> = (props) => {
   const { bet } = props;
@@ -30,9 +31,10 @@ const BetLabelCell: FC<{ bet: Bet }> = (props) => {
 };
 
 const BetTable = () => {
-  const { events, isLoading } = useEvents();
+  const { events, isLoading, error } = useEvents();
 
   if (isLoading) return <Loading />;
+  if (error) return <Error error={error} />;
 
   return (
     <table className="bet-table">
