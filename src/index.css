@@ -1,7 +1,20 @@
+body {
+  margin: 0;
+}
+
 .bet-table {
   border: 1px solid black;
   width: 100%;
   border-collapse: collapse;
+}
+
+.bet-table th {
+  position: sticky;
+  top: 0;
+  background-color: lightgray;
+  border: 1px solid black;
+  padding: 12px;
+  font-weight: normal;
 }
 
 .bet-table td {
