@@ -1,0 +1,28 @@
+.bet-table {
+  border: 1px solid black;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bet-table td {
+  border: 1px solid black;
+  padding: 0 10px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.bet-table td:first-child {
+  text-align: start;
+}
+
+.bet-cell {
+  cursor: pointer;
+}
+
+.bet-cell-active {
+  background-color: yellow;
+}
+
+.bet-name-cell {
+  padding: 10px 10px !important;
+}
