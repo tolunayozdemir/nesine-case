@@ -3,6 +3,7 @@ import useEvents from "../hooks/useEvents";
 import useCoupon from "../hooks/useCoupon";
 import { classnames } from "../utils";
 import Bet from "../models/Bet";
+import Loading from "./Loading";
 
 const BetCell: FC<{ bet: Bet }> = (props) => {
   const { bet } = props;
@@ -16,9 +17,8 @@ const BetCell: FC<{ bet: Bet }> = (props) => {
       onClick={onClick}
       className={classnames({
         ["bet-cell"]: true,
-        ["bet-cell-active"]: isActive,
-      })}
-    >
+        ["bet-cell-active"]: isActive
+      })}>
       {bet.odd}
     </td>
   );
@@ -30,7 +30,9 @@ const BetLabelCell: FC<{ bet: Bet }> = (props) => {
 };
 
 const BetTable = () => {
-  const events = useEvents();
+  const { events, isLoading } = useEvents();
+
+  if (isLoading) return <Loading />;
 
   return (
     <table className="bet-table">

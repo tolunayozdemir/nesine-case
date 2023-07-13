@@ -26,7 +26,11 @@ describe("useEvent hook", () => {
 
   it("return event context value", () => {
     const mockEventName = "Galatasaray - Beşiktaş";
-    const mockContextValue = [{ ...mockEvent, N: mockEventName }];
+    const mockContextValue = {
+      events: [{ ...mockEvent, N: mockEventName }],
+      isLoading: false,
+      error: null
+    };
     const TestComponent = () => {
       const events = useEvents();
 

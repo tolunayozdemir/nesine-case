@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { Event } from "../types";
 
-type EventContextValue = Event[];
+type EventContextValue = { events: Event[]; isLoading: boolean; error: string | null };
 
 const EventContext = createContext<EventContextValue | null>(null);
 
