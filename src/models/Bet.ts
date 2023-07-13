@@ -33,8 +33,8 @@ export default class Bet {
   }
 
   get mbs() {
-    const { OCG } = this;
-    return OCG.MBS;
+    const { OC } = this;
+    return OC.MBS;
   }
 
   get code() {

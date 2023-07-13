@@ -2,6 +2,7 @@ export interface OC {
   ID: string;
   O: string;
   N: string;
+  MBS: string;
 }
 
 export interface OCG {

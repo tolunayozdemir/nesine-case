@@ -4,7 +4,7 @@ import EventContext from "../contexts/EventContext";
 const useEvents = () => {
   const context = useContext(EventContext);
   if (!context) {
-    throw new Error("useEvents must be used within a BetProvider");
+    throw new Error("useEvents must be used within a EventProvider");
   }
   return context;
 };
