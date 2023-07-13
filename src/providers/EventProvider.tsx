@@ -7,7 +7,7 @@ import React, {
 import EventContext from "../contexts/EventContext";
 import { Event } from "../types";
 
-const EventProvider: FunctionComponent<PropsWithChildren<{}>> = ({
+const EventProvider: FunctionComponent<PropsWithChildren> = ({
   children,
 }) => {
   const [events, setEvents] = useState<Event[]>([]);

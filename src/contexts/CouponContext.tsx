@@ -1,5 +1,4 @@
 import { createContext } from "react";
-import { Event } from "../types";
 import Bet from "../models/Bet";
 
 interface CouponContext {

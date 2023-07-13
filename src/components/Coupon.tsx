@@ -29,9 +29,7 @@ const Coupon = () => {
           </Fragment>
         );
       })}
-      <div className="coupon-total">
-        Toplam Tutar: {totalBetOdd && totalBetOdd.toFixed(2)} TL
-      </div>
+      <div className="coupon-total">Toplam Tutar: {totalBetOdd && totalBetOdd.toFixed(2)} TL</div>
     </div>
   );
 };
