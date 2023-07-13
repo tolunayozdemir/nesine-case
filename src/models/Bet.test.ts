@@ -20,6 +20,16 @@ describe("Bet class", () => {
     expect(bet.eventId).toBe(NID);
   });
 
+  it("should return correct event ID", () => {
+    const eventName = "Arsenal - Barcelona";
+    mockEvent.N = eventName;
+
+    const bet = new Bet(mockEvent, "1", "1");
+
+    expect(bet.eventName).toBe(eventName);
+  });
+
+
   it("should return correct name", () => {
     const betName = "X";
     mockEvent.OCG[1].OC[1].N = betName;

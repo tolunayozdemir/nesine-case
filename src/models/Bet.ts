@@ -22,6 +22,12 @@ export default class Bet {
     return event.NID;
   }
 
+  get eventName() {
+    const { event } = this;
+
+    return event.N;
+  }
+
   get name() {
     const { OC } = this;
     return OC.N;

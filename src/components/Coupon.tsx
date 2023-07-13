@@ -13,14 +13,14 @@ const Coupon = () => {
   return (
     <div className="coupon">
       {coupon.map((bet) => {
-        const { name, odd, mbs, eventId, code } = bet;
+        const { eventName, odd, mbs, eventId, code } = bet;
 
         return (
           <Fragment key={eventId}>
             <div className="coupon-item">
               <span>{mbs}</span>
               <span>Kod: {code}</span>
-              <span>Maç: {name}</span>
+              <span>Maç: {eventName}</span>
               <span>
                 <b>Oran: {odd}</b>
               </span>
