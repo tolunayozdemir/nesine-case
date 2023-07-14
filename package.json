@@ -7,7 +7,6 @@
     "dev": "webpack serve",
     "build": "webpack --mode production --progress",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
     "test": "jest --watchAll"
   },
   "author": "Tolunay Ozdemir",
